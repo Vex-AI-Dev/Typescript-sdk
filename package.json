@@ -1,5 +1,5 @@
 {
-  "name": "vex-sdk",
+  "name": "@vex/sdk",
   "version": "0.1.0",
   "description": "The reliability layer for AI agents in production",
   "type": "module",
@@ -21,6 +21,9 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "Apache-2.0",
   "author": "Oppla.ai <eng@oppla.ai>",
   "repository": {

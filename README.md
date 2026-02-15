@@ -5,13 +5,13 @@ The reliability layer for AI agents in production. Zero runtime dependencies.
 ## Installation
 
 ```bash
-npm install vex-sdk
+npm install @vex/sdk
 ```
 
 ## Quick Start
 
 ```typescript
-import { Vex, VexBlockError } from 'vex-sdk';
+import { Vex, VexBlockError } from '@vex/sdk';
 
 const vex = new Vex({ apiKey: process.env.VEX_API_KEY! });
 
@@ -51,7 +51,7 @@ await vexSync.close();
 ## Multi-Turn Sessions
 
 ```typescript
-import { Vex, Session } from 'vex-sdk';
+import { Vex, Session } from '@vex/sdk';
 
 const vex = new Vex({ apiKey: process.env.VEX_API_KEY!, config: { mode: 'sync' } });
 const session = new Session(vex, 'my-agent');
