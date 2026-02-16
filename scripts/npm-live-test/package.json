@@ -1,0 +1,15 @@
+{
+  "name": "vex-npm-live-test",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "tsx test_live_smoke.ts"
+  },
+  "dependencies": {
+    "@vex_dev/sdk": "latest"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0"
+  }
+}

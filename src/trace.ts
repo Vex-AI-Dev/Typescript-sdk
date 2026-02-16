@@ -77,10 +77,11 @@ export class TraceContext {
   }): void {
     this.steps.push(
       createStepRecord({
-        stepName: `${opts.type}:${opts.name}`,
-        input: typeof opts.input === 'string' ? opts.input : JSON.stringify(opts.input ?? ''),
-        output: typeof opts.output === 'string' ? opts.output : JSON.stringify(opts.output ?? ''),
-        timestamp: opts.durationMs !== undefined ? `${opts.durationMs}ms` : undefined,
+        stepType: opts.type,
+        name: opts.name,
+        input: opts.input,
+        output: opts.output,
+        durationMs: opts.durationMs,
       }),
     );
   }

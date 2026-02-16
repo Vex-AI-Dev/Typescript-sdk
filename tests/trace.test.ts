@@ -30,8 +30,13 @@ describe('TraceContext', () => {
     ctx.step({ type: 'tool', name: 'search', input: 'query', output: 'results', durationMs: 150 });
     const steps = ctx.getSteps();
     expect(steps).toHaveLength(2);
-    expect(steps[0].stepName).toBe('llm:call_openai');
-    expect(steps[1].stepName).toBe('tool:search');
+    expect(steps[0].stepType).toBe('llm');
+    expect(steps[0].name).toBe('call_openai');
+    expect(steps[0].input).toBe('prompt');
+    expect(steps[0].output).toBe('response');
+    expect(steps[1].stepType).toBe('tool');
+    expect(steps[1].name).toBe('search');
+    expect(steps[1].durationMs).toBe(150);
     // Verify getSteps returns a copy
     steps.push(steps[0]);
     expect(ctx.getSteps()).toHaveLength(2);

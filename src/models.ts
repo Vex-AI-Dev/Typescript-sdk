@@ -17,9 +17,11 @@ export interface ConversationTurn {
 }
 
 export interface StepRecord {
-  stepName: string;
-  input: string;
-  output: string;
+  stepType: string;
+  name: string;
+  input: unknown;
+  output: unknown;
+  durationMs?: number;
   timestamp: string;
 }
 
@@ -55,15 +57,19 @@ export interface VexResult {
 }
 
 export function createStepRecord(opts: {
-  stepName: string;
-  input: string;
-  output: string;
+  stepType: string;
+  name: string;
+  input?: unknown;
+  output?: unknown;
+  durationMs?: number;
   timestamp?: string;
 }): StepRecord {
   return {
-    stepName: opts.stepName,
-    input: opts.input,
-    output: opts.output,
+    stepType: opts.stepType,
+    name: opts.name,
+    input: opts.input ?? null,
+    output: opts.output ?? null,
+    durationMs: opts.durationMs,
     timestamp: opts.timestamp ?? new Date().toISOString(),
   };
 }
@@ -90,8 +96,8 @@ export function createExecutionEvent(opts: {
   return {
     executionId: opts.executionId ?? randomUUID(),
     agentId: opts.agentId,
-    input: opts.input,
-    output: opts.output,
+    input: opts.input ?? null,
+    output: opts.output ?? null,
     steps: opts.steps ?? [],
     metadata: opts.metadata ?? {},
     timestamp: opts.timestamp ?? new Date().toISOString(),

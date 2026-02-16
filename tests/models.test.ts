@@ -4,11 +4,13 @@ import { createStepRecord, createExecutionEvent } from '../src/models';
 describe('createStepRecord', () => {
   it('auto-generates timestamp', () => {
     const step = createStepRecord({
-      stepName: 'llm_call',
+      stepType: 'llm',
+      name: 'call_openai',
       input: 'hello',
       output: 'world',
     });
-    expect(step.stepName).toBe('llm_call');
+    expect(step.stepType).toBe('llm');
+    expect(step.name).toBe('call_openai');
     expect(step.input).toBe('hello');
     expect(step.output).toBe('world');
     expect(typeof step.timestamp).toBe('string');
@@ -19,12 +21,24 @@ describe('createStepRecord', () => {
   it('allows overriding timestamp', () => {
     const ts = '2026-01-01T00:00:00.000Z';
     const step = createStepRecord({
-      stepName: 'test',
+      stepType: 'tool',
+      name: 'search',
       input: 'a',
       output: 'b',
       timestamp: ts,
     });
     expect(step.timestamp).toBe(ts);
+  });
+
+  it('records durationMs', () => {
+    const step = createStepRecord({
+      stepType: 'db_query',
+      name: 'fetch_users',
+      durationMs: 42,
+    });
+    expect(step.durationMs).toBe(42);
+    expect(step.input).toBeNull();
+    expect(step.output).toBeNull();
   });
 });
 
@@ -51,7 +65,7 @@ describe('createExecutionEvent', () => {
       input: 'i',
       output: 'o',
       executionId: 'custom-id',
-      steps: [{ stepName: 's', input: 'x', output: 'y', timestamp: 't' }],
+      steps: [{ stepType: 'tool', name: 's', input: 'x', output: 'y', timestamp: 't' }],
       metadata: { key: 'val' },
       sessionId: 'sess-1',
       conversationHistory: [{ role: 'user', content: 'hi', turnIndex: 0 }],
