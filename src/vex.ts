@@ -15,6 +15,8 @@ export interface TraceOptions {
   agentId: string;
   task?: string;
   input?: unknown;
+  experimentId?: string;
+  variant?: string;
 }
 
 export class Vex {
@@ -67,7 +69,7 @@ export class Vex {
     opts: TraceOptions,
     fn: (ctx: TraceContext) => Promise<void> | void,
   ): Promise<VexResult> {
-    const ctx = new TraceContext({ agentId: opts.agentId, task: opts.task, input: opts.input });
+    const ctx = new TraceContext({ agentId: opts.agentId, task: opts.task, input: opts.input, experimentId: opts.experimentId, variant: opts.variant });
     await fn(ctx);
     const event = ctx.buildEvent();
     return this.processEvent(event);

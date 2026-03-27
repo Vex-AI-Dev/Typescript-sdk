@@ -14,6 +14,8 @@ export interface TraceContextOptions {
   sequenceNumber?: number;
   parentExecutionId?: string;
   conversationHistory?: ConversationTurn[];
+  experimentId?: string;
+  variant?: string;
 }
 
 export class TraceContext {
@@ -24,6 +26,8 @@ export class TraceContext {
   private readonly sequenceNumber?: number;
   private readonly parentExecutionId?: string;
   private readonly conversationHistory?: ConversationTurn[];
+  private readonly experimentId?: string;
+  private readonly variant?: string;
   private readonly startTime: number;
   private output: unknown = undefined;
   private groundTruth: unknown = undefined;
@@ -41,6 +45,8 @@ export class TraceContext {
     this.sequenceNumber = opts.sequenceNumber;
     this.parentExecutionId = opts.parentExecutionId;
     this.conversationHistory = opts.conversationHistory;
+    this.experimentId = opts.experimentId;
+    this.variant = opts.variant;
     this.startTime = performance.now();
   }
 
@@ -131,6 +137,8 @@ export class TraceContext {
       groundTruth: this.groundTruth,
       schemaDefinition: this.schema,
       metadata: this.metadata,
+      experimentId: this.experimentId,
+      variant: this.variant,
     });
   }
 }

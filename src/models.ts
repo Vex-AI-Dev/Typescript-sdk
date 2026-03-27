@@ -43,6 +43,8 @@ export interface ExecutionEvent {
   latencyMs?: number;
   groundTruth?: unknown;
   schemaDefinition?: Record<string, unknown>;
+  experimentId?: string;
+  variant?: string;
 }
 
 export interface VexResult {
@@ -92,6 +94,8 @@ export function createExecutionEvent(opts: {
   latencyMs?: number;
   groundTruth?: unknown;
   schemaDefinition?: Record<string, unknown>;
+  experimentId?: string;
+  variant?: string;
 }): ExecutionEvent {
   return {
     executionId: opts.executionId ?? randomUUID(),
@@ -111,5 +115,7 @@ export function createExecutionEvent(opts: {
     latencyMs: opts.latencyMs,
     groundTruth: opts.groundTruth,
     schemaDefinition: opts.schemaDefinition,
+    experimentId: opts.experimentId,
+    variant: opts.variant,
   };
 }
